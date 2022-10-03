@@ -22,43 +22,50 @@ $("#currentDay").append(displayDate)
 
 
 //create row div
-const timeBlockParent = $('<div>')
-timeBlockParent.attr('class', 'row')
-timeBlockParent.attr('id', 'parent')
-$(".container").append(timeBlockParent)
+function createTimeBlock() {
+    const timeBlock = $('<div>')
+    timeBlock.attr('class', 'row')
+    timeBlock.attr('id', 'parent')
+    $(".container").append(timeBlock)
+}
+
 
 //create hour div
-const hour = $('<div>')
-hour.text('appendenge')
-hour.attr('class', 'col-2 hour')
-$("#parent").append(hour)
+function createHour() {
+    const hour = $('<div>')
+    hour.text('appendenge')
+    hour.attr('class', 'col-2 hour')
+    $("#parent").append(hour)
+}
 
 //create input text div
-const textArea = $('<textarea>')
-textArea.attr('class', 'col-8')
-textArea.attr('placeholder', "task")
-$("#parent").append(textArea)
+function createTextArea() {
+    const textArea = $('<textarea>')
+    textArea.attr('class', 'col-8')
+    textArea.attr('placeholder', "task")
+    $("#parent").append(textArea)
+}
 
 //create save button
-const btn = $('<button>')
-btn.text('save')
-btn.attr('class', 'col-2 saveBtn')
-$("#parent").append(btn)
+function createSaveBtn() {
+    const saveBtn = $('<button>')
+    saveBtn.text('save')
+    saveBtn.attr('class', 'col-2 saveBtn')
+    $("#parent").append(saveBtn)
+}
 
 
+function displayTimeBlocks() {
 
-// {/* <div class="row">
-// <div class="col-2 hour">8:00 AM</div>
-// <textarea id="8" class="col-8" placeholder="Task"></textarea>
-// <button class="col-2 saveBtn" onclick="saveText(8)">Save</button>
-// </div>   */}
+    for (let i = 9; i <= 17; i++) {
+        createTimeBlock();
+        createHour();
+        createTextArea();
+        createSaveBtn();
 
+}}
 
-// function createTimeRow(){
-//     const timeBlock =
-// }
-
-
+displayTimeBlocks()
 
 
 
