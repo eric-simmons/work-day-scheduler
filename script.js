@@ -14,11 +14,15 @@
 const DateTime = luxon.DateTime;
 const now = DateTime.now();
 const date = now.toLocaleString(DateTime.DATETIME_MED)
+workingHours = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 console.log(date)
+console.log(now.hour)
 
 const displayDate = $('<div>')
 displayDate.text(date)
 $("#currentDay").append(displayDate)
+
+
 
 
 //create row div
@@ -31,9 +35,9 @@ function createTimeBlock() {
 
 
 //create hour div
-function createHour() {
+function createHour(i) {
     const hour = $('<div>')
-    hour.text('appendenge')
+    hour.text(i + "00 hours")
     hour.attr('class', 'col-2 hour')
     $("#parent").append(hour)
 }
@@ -59,7 +63,7 @@ function displayTimeBlocks() {
 
     for (let i = 9; i <= 17; i++) {
         createTimeBlock();
-        createHour();
+        createHour(i);
         createTextArea();
         createSaveBtn();
 
