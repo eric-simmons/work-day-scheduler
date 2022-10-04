@@ -41,11 +41,12 @@ function createTextArea(i) {
     textArea.attr('class', 'col-8 textArea')
     textArea.attr('placeholder', "task")
     $("#parent").append(textArea)
-
+    var textInput = textArea.value
+    console.log(textInput)
     if( i < currentHour){
         textArea.attr('class', 'col-8 textArea past')
     }
-    else if (i = currentHour){
+    else if (i === currentHour){
         textArea.attr('class', 'col-8 textArea present')
     }
     else if (i > currentHour){
@@ -84,6 +85,16 @@ function submitTask(event){
 event.preventDefault()
 var task = input.value
 }
+
+
+
+
+
+// localStorage.setItem('task', 'task1')
+// var = localStorage.getItem('task')
+
+
+
 
 // $('.saveBtn').click(
 //     function save(textArea) {
