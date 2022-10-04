@@ -1,12 +1,4 @@
-// IVEN I am using a daily planner to create a schedule
-// WHEN I open the planner
-// THEN the current day is displayed at the top of the calendar
-// WHEN I scroll down
-// THEN I am presented with time blocks for standard business hours
-// WHEN I view the time blocks for that day
-// THEN each time block is color-coded to indicate whether it is in the past, present, or future
-// WHEN I click into a time block
-// THEN I can enter an event
+
 // WHEN I click the save button for that time block
 // THEN the text for that event is saved in local storage
 // WHEN I refresh the page
@@ -14,11 +6,11 @@
 const DateTime = luxon.DateTime;
 const now = DateTime.now();
 const date = now.toLocaleString(DateTime.DATETIME_MED)
-workingHours = [9, 10, 11, 12, 13, 14, 15, 16, 17]
-console.log(date)
-console.log(now.hour)
+const currentHour = now.hour
 
 const displayDate = $('<div>')
+
+
 displayDate.text(date)
 $("#currentDay").append(displayDate)
 
@@ -26,14 +18,13 @@ $("#currentDay").append(displayDate)
 
 
 //create row div
-function createTimeBlock() {
+function createTimeBlock(i) {
+    // console.log('row timeBlock' + i)
     const timeBlock = $('<div>')
-    timeBlock.attr('class', 'row')
+    timeBlock.attr('class', 'row timeBlock' + i)
     timeBlock.attr('id', 'parent')
     $(".container").append(timeBlock)
 }
-
-
 //create hour div
 function createHour(i) {
     const hour = $('<div>')
@@ -41,15 +32,27 @@ function createHour(i) {
     hour.attr('class', 'col-2 hour')
     $("#parent").append(hour)
 }
-
 //create input text div
-function createTextArea() {
+function createTextArea(i) {
+    
+    console.log(i)
+    console.log(currentHour)
     const textArea = $('<textarea>')
-    textArea.attr('class', 'col-8')
+    textArea.attr('class', 'col-8 textArea')
     textArea.attr('placeholder', "task")
     $("#parent").append(textArea)
-}
 
+    if( i < currentHour){
+        textArea.attr('class', 'col-8 textArea past')
+    }
+    else if (i = currentHour){
+        textArea.attr('class', 'col-8 textArea present')
+    }
+    else if (i > currentHour){
+        textArea.attr('class', 'col-8 textArea future')
+    }
+  
+}
 //create save button
 function createSaveBtn() {
     const saveBtn = $('<button>')
@@ -57,24 +60,35 @@ function createSaveBtn() {
     saveBtn.attr('class', 'col-2 saveBtn')
     $("#parent").append(saveBtn)
 }
+//i = start of day 
+function displayTimeBlocks(i) {
 
 
-function displayTimeBlocks() {
-
-    for (let i = 9; i <= 17; i++) {
-        createTimeBlock();
+    for (let i = 0; i <= 24; i++) {
+        createTimeBlock(i);
         createHour(i);
-        createTextArea();
-        createSaveBtn();
+        createTextArea(i);
+        createSaveBtn(i);
 
-}}
-
+    }
+}
 displayTimeBlocks()
 
 
 
+console.log(currentHour)
 
 
+
+function submitTask(event){
+event.preventDefault()
+var task = input.value
+}
+
+// $('.saveBtn').click(
+//     function save(textArea) {
+//         localStorage.setItem('textArea', JSON.stringify())
+//     })
 
 
 
