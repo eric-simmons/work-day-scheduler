@@ -7,7 +7,6 @@ const DateTime = luxon.DateTime;
 const now = DateTime.now();
 const date = now.toLocaleString(DateTime.DATETIME_MED)
 const currentHour = now.hour
-
 const displayDate = $('<div>')
 
 
@@ -34,38 +33,35 @@ function createHour(i) {
 }
 //create input text div
 function createTextArea(i) {
-    
-    console.log(i)
-    console.log(currentHour)
     const textArea = $('<textarea>')
     textArea.attr('class', 'col-8 textArea')
+    textArea.attr('id', 'task' + i)
     textArea.attr('placeholder', "task")
     $("#parent").append(textArea)
-    var textInput = textArea.value
-    console.log(textInput)
-    if( i < currentHour){
+    if (i < currentHour) {
         textArea.attr('class', 'col-8 textArea past')
     }
-    else if (i === currentHour){
+    else if (i === currentHour) {
         textArea.attr('class', 'col-8 textArea present')
     }
-    else if (i > currentHour){
+    else if (i > currentHour) {
         textArea.attr('class', 'col-8 textArea future')
     }
-  
+
 }
 //create save button
-function createSaveBtn() {
+function createSaveBtn(i) {
     const saveBtn = $('<button>')
     saveBtn.text('save')
     saveBtn.attr('class', 'col-2 saveBtn')
+    saveBtn.attr('id', 'save' + i)
     $("#parent").append(saveBtn)
 }
 //i = start of day 
 function displayTimeBlocks(i) {
 
 
-    for (let i = 0; i <= 24; i++) {
+    for (let i = 9; i <= 17; i++) {
         createTimeBlock(i);
         createHour(i);
         createTextArea(i);
@@ -75,32 +71,26 @@ function displayTimeBlocks(i) {
 }
 displayTimeBlocks()
 
-
+// localStorage.clear()
 
 console.log(currentHour)
 
 
 
-function submitTask(event){
-event.preventDefault()
-var task = input.value
-}
+// local storage
+for (let i = 9; i <= 17; i++) {
+   
+    $('#save'+ i).click(function () {
+    
+        var task = document.getElementById('task' + i)
+    
+        console.log('clicked')
+        localStorage.setItem('textArea'+ i, task.value)
+    })}
 
 
-
-
-
-// localStorage.setItem('task', 'task1')
-// var = localStorage.getItem('task')
-
-
-
-
-// $('.saveBtn').click(
-//     function save(textArea) {
-//         localStorage.setItem('textArea', JSON.stringify())
-//     })
-
+var savedTask = localStorage.getItem('textArea' + i)
+task9.textContent = savedTask
 
 
 
