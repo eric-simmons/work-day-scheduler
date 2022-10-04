@@ -67,30 +67,24 @@ function displayTimeBlocks(i) {
         createTextArea(i);
         createSaveBtn(i);
 
+
+//local storage
+        $('#save'+ i).click(function () {
+            var task = $("#task" + i).val()
+            
+            localStorage.setItem('textArea'+ i, task)
+            // ("task" + i) = localStorage.getItem('textArea' + i)
+
+            $('task' + i).val(localStorage.getItem('textArea' + i));
+
+ 
+        })
+
     }
 }
 displayTimeBlocks()
 
-// localStorage.clear()
 
-console.log(currentHour)
-
-
-
-// local storage
-for (let i = 9; i <= 17; i++) {
-   
-    $('#save'+ i).click(function () {
-    
-        var task = document.getElementById('task' + i)
-    
-        console.log('clicked')
-        localStorage.setItem('textArea'+ i, task.value)
-    })}
-
-
-var savedTask = localStorage.getItem('textArea' + i)
-task9.textContent = savedTask
 
 
 
